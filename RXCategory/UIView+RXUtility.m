@@ -13,23 +13,23 @@
 @implementation UIView (RXUtility)
 
 #pragma mark - Property
-- (id)tgr
+- (id)rx_tgr
 {
-    return objc_getAssociatedObject(self, @"tgr");
+    return objc_getAssociatedObject(self, @"rx_tgr");
 }
 
-- (void)setTgr:(id)tgr
+- (void)setRx_tgr:(id)rx_tgr
 {
-    objc_setAssociatedObject(self, @"tgr", tgr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @"rx_tgr", rx_tgr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (id)data
+- (id)rx_data
 {
-    return objc_getAssociatedObject(self, @"data");
+    return objc_getAssociatedObject(self, @"rx_data");
 }
 
-- (void)setData:(id)data
+- (void)setRx_data:(id)rx_data
 {
-    objc_setAssociatedObject(self, @"data", data, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, @"rx_data", rx_data, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (CGFloat)left
@@ -155,13 +155,19 @@
 }
 
 
-- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii
+
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii bounds:(CGRect)bounds
 {
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:rectCorner cornerRadii:cornerRadii];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:rectCorner cornerRadii:cornerRadii];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = self.bounds;
+    maskLayer.frame = bounds;
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
+}
+
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii
+{
+    [self rx_makeRoundWithRectCorner:rectCorner cornerRadii:cornerRadii bounds:self.bounds];
 }
 
 - (void)rx_makeLeftRightRound
@@ -240,20 +246,20 @@
 
 - (void)rx_addGestureRecognizerWithTarget:(id)target action:(SEL)action
 {
-    if (self.tgr != nil) {
-        [self removeGestureRecognizer:self.tgr];
+    if (self.rx_tgr != nil) {
+        [self removeGestureRecognizer:self.rx_tgr];
     }
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
     tgr.numberOfTapsRequired = 1;
-    self.tgr = tgr;
+    self.rx_tgr = tgr;
     self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:self.tgr];
+    [self addGestureRecognizer:self.rx_tgr];
 }
 
 - (void)rx_removeGestureRecognizer
 {
-    if (self.tgr != nil) {
-        [self removeGestureRecognizer:self.tgr];
+    if (self.rx_tgr != nil) {
+        [self removeGestureRecognizer:self.rx_tgr];
     }
 }
 

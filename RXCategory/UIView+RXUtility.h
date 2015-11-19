@@ -11,7 +11,7 @@
 @interface UIView (RXUtility)
 
 
-@property (nonatomic, retain) id data;
+@property (nonatomic, retain) id rx_data;
 
 
 @property (nonatomic, readwrite) CGFloat left;
@@ -26,10 +26,11 @@
 @property (nonatomic, readwrite) CGSize size;
 
 
-@property (nonatomic, strong) UITapGestureRecognizer *tgr;
+@property (nonatomic, strong) UITapGestureRecognizer *rx_tgr;
 
 // 使整个UIView 变成圆形,  当且只有width = height 的时候才是圆形
 - (void)rx_makeRound;
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii bounds:(CGRect)bounds;
 
 - (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii;
 
