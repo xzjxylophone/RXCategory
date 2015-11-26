@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name     = "RXCategory"
-  s.version  = "0.2"
+  s.version  = "0.3"
   s.license  = "MIT"
   s.summary  = "RXCategory is a normal category"
   s.homepage = "https://github.com/xzjxylophone/RXCategory"

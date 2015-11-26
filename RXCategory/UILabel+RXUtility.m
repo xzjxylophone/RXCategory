@@ -17,6 +17,14 @@
 
 - (void)rx_setAttributedTextWithStringAry:(NSArray *)stringAry fontAry:(NSArray *)fontAry colorAry:(NSArray *)colorAry underlineAry:(NSArray *)underlineAry
 {
+    
+    [self rx_setAttributedTextWithStringAry:stringAry fontAry:fontAry colorAry:colorAry underlineAry:underlineAry underlineColorAry:nil];
+    
+ 
+}
+
+- (void)rx_setAttributedTextWithStringAry:(NSArray *)stringAry fontAry:(NSArray *)fontAry colorAry:(NSArray *)colorAry underlineAry:(NSArray *)underlineAry underlineColorAry:(NSArray *)underlineColorAry
+{
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:[stringAry componentsJoinedByString:@""]];
     int startIndex = 0;
     for (int i = 0; i < stringAry.count; i++) {
@@ -24,6 +32,8 @@
         UIColor *textColor = i < colorAry.count ? colorAry[i] : [NSNull null];
         UIFont *font = i < fontAry.count ? fontAry[i] : [NSNull null];
         NSNumber *underline = i < underlineAry.count ? underlineAry[i] : [NSNull null];
+        UIColor *underlineColor = i < underlineColorAry.count ? underlineColorAry[i] : [NSNull null];
+
         NSRange range = NSMakeRange(startIndex, tmp.length);
         if (![textColor isKindOfClass:[NSNull class]]) {
             [attStr addAttribute:NSForegroundColorAttributeName value:textColor range:range];
@@ -34,12 +44,13 @@
         if (![underline isKindOfClass:[NSNull class]]) {
             [attStr addAttribute:NSUnderlineStyleAttributeName value:underline range:range];
         }
+        if (![underlineColor isKindOfClass:[NSNull class]]) {
+            [attStr addAttribute:NSUnderlineColorAttributeName value:underlineColor range:range];
+        }
         startIndex += tmp.length;
     }
     self.attributedText = attStr;
 }
-
-
 
 
 

@@ -14,6 +14,8 @@
 
 - (void)rx_setAttributedTextWithStringAry:(NSArray *)stringAry fontAry:(NSArray *)fontAry colorAry:(NSArray *)colorAry underlineAry:(NSArray *)underlineAry;
 
+- (void)rx_setAttributedTextWithStringAry:(NSArray *)stringAry fontAry:(NSArray *)fontAry colorAry:(NSArray *)colorAry underlineAry:(NSArray *)underlineAry underlineColorAry:(NSArray *)underlineColorAry;
+
 
 
 
