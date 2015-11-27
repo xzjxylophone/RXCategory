@@ -11,8 +11,9 @@
 @interface UIImage (RXUtility)
 - (UIImage *)rx_scaleToSize:(CGSize)newSize;
 //翻转UIImage
-- (UIImage *)rx_rotateWithimageOrientation:(UIImageOrientation)imageOrientation;
+- (UIImage *)rx_rotateWithImageOrientation:(UIImageOrientation)imageOrientation;
 
+- (UIImage*)rx_rotatedByDegrees:(CGFloat)degrees;
 
 
 @end
