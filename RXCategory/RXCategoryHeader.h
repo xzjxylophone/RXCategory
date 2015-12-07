@@ -9,6 +9,7 @@
 #ifndef RXCategoryHeader_h
 #define RXCategoryHeader_h
 
+#import "NSObject+RXUtitlity.h"
 #import "NSDictionary+RXUtility.h"
 #import "NSString+RXUtility.h"
 #import "NSURL+RXUtility.h"

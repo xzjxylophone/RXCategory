@@ -23,6 +23,7 @@
 		58B167F31BF9D19B0024EE61 /* UIView+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B167E81BF9D19B0024EE61 /* UIView+RXUtility.m */; };
 		58B167F71BF9D2530024EE61 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B167F51BF9D2530024EE61 /* MainViewController.m */; };
 		58B167F81BF9D2530024EE61 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B167F61BF9D2530024EE61 /* MainViewController.xib */; };
+		58FD6D791C152E9000CB800C /* NSObject+RXUtitlity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FD6D781C152E9000CB800C /* NSObject+RXUtitlity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,8 @@
 		58B167F51BF9D2530024EE61 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		58B167F61BF9D2530024EE61 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		58B167F91BF9D2A60024EE61 /* RXCategoryHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RXCategoryHeader.h; sourceTree = "<group>"; };
+		58FD6D771C152E9000CB800C /* NSObject+RXUtitlity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RXUtitlity.h"; sourceTree = "<group>"; };
+		58FD6D781C152E9000CB800C /* NSObject+RXUtitlity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RXUtitlity.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				58B167E71BF9D19B0024EE61 /* UIView+RXUtility.h */,
 				58B167E81BF9D19B0024EE61 /* UIView+RXUtility.m */,
 				58B167F91BF9D2A60024EE61 /* RXCategoryHeader.h */,
+				58FD6D771C152E9000CB800C /* NSObject+RXUtitlity.h */,
+				58FD6D781C152E9000CB800C /* NSObject+RXUtitlity.m */,
 			);
 			name = RXCategory;
 			path = ../../RXCategory;
@@ -222,6 +227,7 @@
 				58B167E91BF9D19B0024EE61 /* NSDictionary+RXUtility.m in Sources */,
 				58B167F21BF9D19B0024EE61 /* UIScrollView+RXUtility.m in Sources */,
 				58B167ED1BF9D19B0024EE61 /* UIDevice+RXUtility.m in Sources */,
+				58FD6D791C152E9000CB800C /* NSObject+RXUtitlity.m in Sources */,
 				58B167F71BF9D2530024EE61 /* MainViewController.m in Sources */,
 				58B167EB1BF9D19B0024EE61 /* NSURL+RXUtility.m in Sources */,
 				58B167F31BF9D19B0024EE61 /* UIView+RXUtility.m in Sources */,
@@ -356,6 +362,7 @@
 				58B167D11BF9D18D0024EE61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

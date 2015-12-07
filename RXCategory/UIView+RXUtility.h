@@ -11,7 +11,6 @@
 @interface UIView (RXUtility)
 
 
-@property (nonatomic, retain) id rx_data;
 
 
 @property (nonatomic, readwrite) CGFloat left;

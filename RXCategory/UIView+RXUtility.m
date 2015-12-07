@@ -8,7 +8,7 @@
 
 #import "UIView+RXUtility.h"
 #import <objc/runtime.h>
-
+#import "NSObject+RXUtitlity.h"
 
 @implementation UIView (RXUtility)
 
@@ -22,15 +22,7 @@
 {
     objc_setAssociatedObject(self, @"rx_tgr", rx_tgr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-- (id)rx_data
-{
-    return objc_getAssociatedObject(self, @"rx_data");
-}
 
-- (void)setRx_data:(id)rx_data
-{
-    objc_setAssociatedObject(self, @"rx_data", rx_data, OBJC_ASSOCIATION_RETAIN);
-}
 
 - (CGFloat)left
 {
