@@ -52,4 +52,10 @@
 - (void)rx_removeAppDidEnterBgNotification;
 
 
+
+// 只有在 Debug 模式的情况下有效,方便调试用
++ (void)setDefaultColorsInViews:(NSArray *)views;
++ (void)setColors:(NSArray *)colors inViews:(NSArray *)views;
+
+
 @end

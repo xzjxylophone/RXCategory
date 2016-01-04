@@ -17,6 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(40, 40, 20, 20)];
+    UIView *view3 = [[UIView alloc] initWithFrame:CGRectMake(80, 80, 20, 20)];
+    
+    [UIView setDefaultColorsInViews:@[view1, view2, view3]];
+    
+    [self.view addSubview:view1];
+    [self.view addSubview:view2];
+    [self.view addSubview:view3];
 }
 
 - (void)didReceiveMemoryWarning {

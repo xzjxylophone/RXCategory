@@ -296,7 +296,27 @@
 
 
 
-
++ (void)setDefaultColorsInViews:(NSArray *)views
+{
+    [self setColors:@[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]] inViews:views];
+}
++ (void)setColors:(NSArray *)colors inViews:(NSArray *)views
+{
+#if DEBUG
+    NSArray *tmpColors = colors;
+    if (tmpColors.count == 0) {
+        tmpColors = @[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]];
+    }
+    
+    NSInteger tmpCount = tmpColors.count;
+    for (NSInteger i = 0; i < views.count; i++) {
+        NSInteger remain = i % tmpCount;
+        UIColor *color = tmpColors[remain];
+        UIView *view = views[i];
+        view.backgroundColor = color;
+    }
+#endif
+}
 
 
 
