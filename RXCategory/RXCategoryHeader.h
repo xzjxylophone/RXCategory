@@ -9,7 +9,7 @@
 #ifndef RXCategoryHeader_h
 #define RXCategoryHeader_h
 
-#import "NSObject+RXUtitlity.h"
+#import "NSObject+RXUtility.h"
 #import "NSDictionary+RXUtility.h"
 #import "NSString+RXUtility.h"
 #import "NSURL+RXUtility.h"
@@ -21,6 +21,7 @@
 #import "UINavigationController+RXUtility.h"
 #import "UIScrollView+RXUtility.h"
 #import "UIView+RXUtility.h"
+#import "NSFileManager+RXUtility.h"
 
 
 #endif /* RXCategoryHeader_h */

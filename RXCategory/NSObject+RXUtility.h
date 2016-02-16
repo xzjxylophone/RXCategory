@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (RXUtitlity)
+@interface NSObject (RXUtility)
 @property (nonatomic, retain) id rx_data;
 
 @end

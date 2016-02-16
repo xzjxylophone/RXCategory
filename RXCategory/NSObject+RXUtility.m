@@ -6,10 +6,10 @@
 //  Copyright © 2015年 Rush.D.Xzj. All rights reserved.
 //
 
-#import "NSObject+RXUtitlity.h"
+#import "NSObject+RXUtility.h"
 #import <objc/runtime.h>
 
-@implementation NSObject (RXUtitlity)
+@implementation NSObject (RXUtility)
 - (id)rx_data
 {
     return objc_getAssociatedObject(self, @"rx_data");

@@ -8,7 +8,7 @@
 
 #import "UIView+RXUtility.h"
 #import <objc/runtime.h>
-#import "NSObject+RXUtitlity.h"
+#import "NSObject+RXUtility.h"
 
 @implementation UIView (RXUtility)
 
@@ -296,11 +296,11 @@
 
 
 
-+ (void)setDefaultColorsInViews:(NSArray *)views
++ (void)rx_setDefaultColorsInViews:(NSArray *)views
 {
     [self setColors:@[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]] inViews:views];
 }
-+ (void)setColors:(NSArray *)colors inViews:(NSArray *)views
++ (void)rx_setColors:(NSArray *)colors inViews:(NSArray *)views
 {
 #if DEBUG
     NSArray *tmpColors = colors;
@@ -319,8 +319,15 @@
 }
 
 
++ (void)setDefaultColorsInViews:(NSArray *)views
+{
+    return [self rx_setDefaultColorsInViews:views];
+}
 
-
++ (void)setColors:(NSArray *)colors inViews:(NSArray *)views
+{
+    return [self rx_setColors:colors inViews:views];
+}
 
 
 
