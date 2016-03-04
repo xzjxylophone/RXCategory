@@ -13,4 +13,8 @@
 @property (nonatomic, readonly) NSDictionary *rx_params;
 
 
++ (NSURL *)rx_URLWithString:(NSString *)string;
+
+
+
 @end

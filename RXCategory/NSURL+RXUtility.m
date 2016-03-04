@@ -33,4 +33,15 @@
     return result;
 }
 
+
++ (NSURL *)rx_URLWithString:(NSString *)string
+{
+    NSURL *url = [NSURL URLWithString:string];
+    if (url == nil) {
+        NSString *tmpString =  [NSString stringWithString:[string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        url = [NSURL URLWithString:tmpString];
+    }
+    return url;
+}
+
 @end
