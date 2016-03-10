@@ -22,5 +22,5 @@
 #import "UIScrollView+RXUtility.h"
 #import "UIView+RXUtility.h"
 #import "NSFileManager+RXUtility.h"
-
+#import "UIApplication+RXUtility.h"
 #endif /* RXCategoryHeader_h */

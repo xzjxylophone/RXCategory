@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5810E82B1C918328003EBFC7 /* UIApplication+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810E82A1C918328003EBFC7 /* UIApplication+RXUtility.m */; };
 		581447051C72D14400D29075 /* NSFileManager+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 581447041C72D14400D29075 /* NSFileManager+RXUtility.m */; };
 		58B167BD1BF9D18D0024EE61 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B167BC1BF9D18D0024EE61 /* main.m */; };
 		58B167C01BF9D18D0024EE61 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B167BF1BF9D18D0024EE61 /* AppDelegate.m */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5810E8291C918328003EBFC7 /* UIApplication+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+RXUtility.h"; sourceTree = "<group>"; };
+		5810E82A1C918328003EBFC7 /* UIApplication+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+RXUtility.m"; sourceTree = "<group>"; };
 		581447031C72D14400D29075 /* NSFileManager+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+RXUtility.h"; sourceTree = "<group>"; };
 		581447041C72D14400D29075 /* NSFileManager+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+RXUtility.m"; sourceTree = "<group>"; };
 		58B167B81BF9D18D0024EE61 /* RXCategoryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RXCategoryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +150,8 @@
 				58FD6D781C152E9000CB800C /* NSObject+RXUtility.m */,
 				581447031C72D14400D29075 /* NSFileManager+RXUtility.h */,
 				581447041C72D14400D29075 /* NSFileManager+RXUtility.m */,
+				5810E8291C918328003EBFC7 /* UIApplication+RXUtility.h */,
+				5810E82A1C918328003EBFC7 /* UIApplication+RXUtility.m */,
 			);
 			name = RXCategory;
 			path = ../../RXCategory;
@@ -225,6 +230,7 @@
 				58B167EA1BF9D19B0024EE61 /* NSString+RXUtility.m in Sources */,
 				58B167C01BF9D18D0024EE61 /* AppDelegate.m in Sources */,
 				58B167F11BF9D19B0024EE61 /* UINavigationController+RXUtility.m in Sources */,
+				5810E82B1C918328003EBFC7 /* UIApplication+RXUtility.m in Sources */,
 				58B167BD1BF9D18D0024EE61 /* main.m in Sources */,
 				58B167EC1BF9D19B0024EE61 /* UIColor+RXUtility.m in Sources */,
 				58B167F01BF9D19B0024EE61 /* UILabel+RXUtility.m in Sources */,
