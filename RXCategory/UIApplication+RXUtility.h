@@ -11,6 +11,7 @@
 @interface UIApplication (RXUtility)
 
 
++ (void)rx_priaseWithAppId:(NSString *)appId;
 
 
 
