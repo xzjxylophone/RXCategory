@@ -16,6 +16,7 @@
     if (dictionary == nil) {
         return @"";
     }
+    
     NSMutableArray *ary = [NSMutableArray array];
     for (NSString *key in dictionary.allKeys) {
         NSString *value = dictionary[key];
