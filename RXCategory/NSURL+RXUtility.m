@@ -36,6 +36,9 @@
 
 + (NSURL *)rx_URLWithString:(NSString *)string
 {
+    if (string.length == 0) {
+        return nil;
+    }
     NSURL *url = [NSURL URLWithString:string];
     if (url == nil) {
         NSString *tmpString =  [NSString stringWithString:[string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
