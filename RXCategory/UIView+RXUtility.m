@@ -211,7 +211,7 @@
 - (id)rx_clsViewFromCls:(Class)cls
 {
     UIView *v = self;
-    id result;
+    id result = nil;
     do {
         if ([v isKindOfClass:cls]) {
             result = v;

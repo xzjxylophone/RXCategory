@@ -41,7 +41,7 @@
     }
     NSURL *url = [NSURL URLWithString:string];
     if (url == nil) {
-        NSString *tmpString =  [NSString stringWithString:[string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *tmpString =  [NSString stringWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         url = [NSURL URLWithString:tmpString];
     }
     return url;
