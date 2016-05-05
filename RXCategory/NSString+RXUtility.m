@@ -246,9 +246,12 @@ static Byte ivBuff[]   = {0xA,1,0xB,5,4,0xF,7,9,0x17,3,1,6,8,0xC,0xD,91};
                                       derivedKey.mutableBytes, // derivedKey
                                       derivedKey.length);   // derivedKeyLen derive:出自
     
-    NSAssert(result == kCCSuccess,
-             @"Unable to create AES key for spassword: %d", result);
-    return derivedKey;
+    NSAssert(result == kCCSuccess, @"Unable to create AES key for spassword: %d", result);
+    if (result == kCCSuccess) {
+        return derivedKey;
+    } else {
+        return [NSData new];
+    }
 }
 
 - (id)__private_base64EnCodedData
