@@ -50,8 +50,9 @@
 - (NSString *)rx_transform_MD5;
 
 #pragma mark - AES Encrypt/Decrypt
-- (NSString *)rx_transform_AESEncryptWithKey:(NSString *)key;
-- (NSString *)rx_transform_AESDecryptWithKey:(NSString *)key;
+// http://www.cnblogs.com/xzjxylophone/p/5462673.html
+- (NSString *)rx_transform_AES128EncryptWithKey:(NSString *)key;
+- (NSString *)rx_transform_AES128DecryptWithKey:(NSString *)key;
 
 
 

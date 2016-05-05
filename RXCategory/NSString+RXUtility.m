@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonKeyDerivation.h>
 
 @implementation NSString (RXUtility)
 
@@ -169,179 +170,191 @@
 
 #pragma mark - AES Encrypt/Decrypt
 #pragma mark Public
-- (NSString *)rx_transform_AESEncryptWithKey:(NSString *)key
+static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+const NSUInteger kAlgorithmKeySize = kCCKeySizeAES128;
+const NSUInteger kKeyLength = 128;
+const NSUInteger kPBKDFRounds = 10000;  // ~80ms on an iPhone 4
+static Byte saltBuff[] = {0,1,2,3,4,5,6,7,8,9,0xA,0xB,0xC,0xD,0xE,0xF};
+static Byte ivBuff[]   = {0xA,1,0xB,5,4,0xF,7,9,0x17,3,1,6,8,0xC,0xD,91};
+
+
+- (NSString *)rx_transform_AES128EncryptWithKey:(NSString *)key
 {
-    NSData *secretData = [self dataUsingEncoding:NSASCIIStringEncoding];
-    // You can use md5 to make sure key is 16 bits long
-    NSData *encryptedData = [NSString encrypt:secretData key:key];
-    return [NSString hex:encryptedData useLower:YES];
-}
-- (NSString *)rx_transform_AESDecryptWithKey:(NSString *)key
-{
-    NSData *hexData = [self hex];
-    NSData *data = [NSString decrypt:hexData key:key];
-    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-}
-#define kChosenCipherBlockSize	kCCBlockSizeAES128
-#define kChosenCipherKeySize	kCCKeySizeAES128
-CCOptions _padding = kCCOptionPKCS7Padding;
-#pragma mark - Private
-+ (NSData *)encrypt:(NSData *)plainText key:(NSString *)key
-{
-    return [self doCipher:plainText key:key context:kCCEncrypt];
-}
-+ (NSData *)decrypt:(NSData *)plainText key:(NSString *)key
-{
-    return [self doCipher:plainText key:key context:kCCDecrypt];
-}
-+ (NSData *)doCipher:(NSData *)plainText key:(NSString *)key context:(CCOperation)encryptOrDecrypt
-{
-    CCCryptorStatus ccStatus = kCCSuccess;
-    // Symmetric crypto reference.
-    CCCryptorRef thisEncipher = NULL;
-    // Cipher Text container.
-    NSData * cipherOrPlainText = nil;
-    // Pointer to output buffer.
-    uint8_t * bufferPtr = NULL;
-    // Total size of the buffer.
-    size_t bufferPtrSize = 0;
-    // Remaining bytes to be performed on.
-    size_t remainingBytes = 0;
-    // Number of bytes moved to buffer.
-    size_t movedBytes = 0;
-    // Length of plainText buffer.
-    size_t plainTextBufferSize = 0;
-    // Placeholder for total written.
-    size_t totalBytesWritten = 0;
-    // A friendly helper pointer.
-    uint8_t * ptr;
-    CCOptions *pkcs7;
-    pkcs7 = &_padding;
-    NSData *aSymmetricKey = [key dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *sourceData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    // 'key' should be 32 bytes for AES256, will be null-padded otherwise
+    char keyPtr[kAlgorithmKeySize+1]; // room for terminator (unused)
+    bzero(keyPtr, sizeof(keyPtr)); // fill with zeroes (for padding)
+    NSUInteger dataLength = sourceData.length;
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    bzero(buffer, sizeof(buffer));
+    size_t numBytesEncrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmAES128,kCCOptionPKCS7Padding,
+                                          [[key __private_aesKeyData] bytes], kAlgorithmKeySize,
+                                          ivBuff /* initialization vector (optional) */,
+                                          [sourceData bytes], dataLength, /* input */
+                                          buffer, bufferSize, /* output */
+                                          &numBytesEncrypted);
+    if (cryptStatus == kCCSuccess) {
+        NSData *encryptData = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+        return [NSString __private_base64EncodingWithData:encryptData];
+    }
+    free(buffer); //free the buffer;
+    return @"";
     
-    // Initialization vector; dummy in this case 0's.
-    uint8_t iv[kChosenCipherBlockSize];
-    memset((void *) iv, 0x0, (size_t) sizeof(iv));
     
-    plainTextBufferSize = [plainText length];
+}
+- (NSString *)rx_transform_AES128DecryptWithKey:(NSString *)key
+{
+    NSData *cipherData = [self __private_base64EnCodedData];
+    // 'key' should be 32 bytes for AES256, will be null-padded otherwise
+    char keyPtr[kAlgorithmKeySize+1]; // room for terminator (unused)
+    bzero(keyPtr, sizeof(keyPtr)); // fill with zeroes (for padding)
+    NSUInteger dataLength = [cipherData length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding,
+                                          [[key __private_aesKeyData] bytes], kAlgorithmKeySize,
+                                          ivBuff ,/* initialization vector (optional) */
+                                          [cipherData bytes], dataLength, /* input */
+                                          buffer, bufferSize, /* output */
+                                          &numBytesDecrypted);
     
-    // We don't want to toss padding on if we don't need to
-    if (encryptOrDecrypt == kCCEncrypt) {
-        if(*pkcs7 != kCCOptionECBMode) {
-            *pkcs7 = kCCOptionPKCS7Padding;
-        }
-    } else if (encryptOrDecrypt != kCCDecrypt) {
-        NSLog(@"Invalid CCOperation parameter [%d] for cipher context.", *pkcs7 );
+    if (cryptStatus == kCCSuccess) {
+        NSData *encryptData = [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+        return [[[NSString alloc] initWithData:encryptData encoding:NSUTF8StringEncoding] init];
     }
     
-    // Create and Initialize the crypto reference.
-    CCCryptorCreate(encryptOrDecrypt, kCCAlgorithmAES128, *pkcs7, (const void *)[aSymmetricKey bytes], kChosenCipherKeySize, (const void *)iv, &thisEncipher);
+    free(buffer); //free the buffer;
+    return @"";
     
-    // Calculate byte block alignment for all calls through to and including final.
-    bufferPtrSize = CCCryptorGetOutputLength(thisEncipher, plainTextBufferSize, true);
-    
-    // Allocate buffer.
-    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t) );
-    
-    // Zero out buffer.
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    
-    // Initialize some necessary book keeping.
-    ptr = bufferPtr;
-    
-    // Set up initial size.
-    remainingBytes = bufferPtrSize;
-    
-    // Actually perform the encryption or decryption.
-    CCCryptorUpdate(thisEncipher, (const void *) [plainText bytes], plainTextBufferSize, ptr, remainingBytes, &movedBytes);
-    
-    // Handle book keeping.
-    ptr += movedBytes;
-    remainingBytes -= movedBytes;
-    totalBytesWritten += movedBytes;
-    
-    // Finalize everything to the output buffer.
-    ccStatus = CCCryptorFinal(thisEncipher, ptr, remainingBytes, &movedBytes);
-    
-    totalBytesWritten += movedBytes;
-    
-    if(thisEncipher) {
-        (void) CCCryptorRelease(thisEncipher);
-        thisEncipher = NULL;
-    }
-    
-    if (ccStatus == kCCSuccess)
-        cipherOrPlainText = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)totalBytesWritten];
-    else
-        cipherOrPlainText = nil;
-    
-    if(bufferPtr) free(bufferPtr);
-    
-    return cipherOrPlainText;
 }
-+ (NSString *)hex:(NSData *)data useLower:(BOOL)isOutputLower
+
+
+- (NSData *)__private_aesKeyData
 {
-    static const char HexEncodeCharsLower[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-    static const char HexEncodeChars[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-    char *resultData;
-    // malloc result data
-    resultData = malloc([data length] * 2 +1);
-    // convert imgData(NSData) to char[]
-    unsigned char *sourceData = ((unsigned char *)[data bytes]);
-    uint length = (uint)[data length];
+    NSMutableData *derivedKey = [NSMutableData dataWithLength:kAlgorithmKeySize];
+    NSData *salt = [NSData dataWithBytes:saltBuff length:kAlgorithmKeySize];
+    int result = CCKeyDerivationPBKDF(kCCPBKDF2,        // algorithm算法
+                                      self.UTF8String,  // password密码
+                                      self.length,      // passwordLength密码的长度
+                                      salt.bytes,           // salt内容
+                                      salt.length,          // saltLen长度
+                                      kCCPRFHmacAlgSHA1,    // PRF
+                                      kPBKDFRounds,         // rounds循环次数
+                                      derivedKey.mutableBytes, // derivedKey
+                                      derivedKey.length);   // derivedKeyLen derive:出自
     
-    if (isOutputLower) {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeCharsLower[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeCharsLower[(sourceData[index] % 0x10)];
+    NSAssert(result == kCCSuccess,
+             @"Unable to create AES key for spassword: %d", result);
+    return derivedKey;
+}
+
+- (id)__private_base64EnCodedData
+{
+    if (self.length == 0) {
+        return [NSData data];
+    }
+    static char *decodingTable = NULL;
+    if (decodingTable == NULL) {
+        decodingTable = malloc(kKeyLength);
+        if (decodingTable == NULL) {
+            return [NSData data];
         }
-    } else {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeChars[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeChars[(sourceData[index] % 0x10)];
+        memset(decodingTable, CHAR_MAX, kKeyLength);
+        NSUInteger i;
+        for (i = 0; i < 64; i++) {
+            decodingTable[(short)encodingTable[i]] = i;
         }
     }
-    resultData[[data length] * 2] = 0;
-    // convert result(char[]) to NSString
-    NSString *result = [NSString stringWithCString:resultData encoding:NSASCIIStringEncoding];
-    sourceData = nil;
-    free(resultData);
-    return result;
-}
-- (NSData *)hex
-{
-    static const unsigned char HexDecodeChars[] =
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, //49
-        2, 3, 4, 5, 6, 7, 8, 9, 0, 0, //59
-        0, 0, 0, 0, 0, 10, 11, 12, 13, 14,
-        15, 0, 0, 0, 0, 0, 0, 0, 0, 0,  //79
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 10, 11, 12,   //99
-        13, 14, 15
-    };
     
-    // convert data(NSString) to CString
-    const char *source = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    // malloc buffer
-    unsigned char *buffer;
-    uint length =(uint)strlen(source) / 2;
-    buffer = malloc(length);
-    for (uint index = 0; index < length; index++) {
-        buffer[index] = (HexDecodeChars[source[index * 2]] << 4) + (HexDecodeChars[source[index * 2 + 1]]);
+    const char *characters = [self cStringUsingEncoding:NSASCIIStringEncoding];
+    if (characters == NULL) {    //  Not an ASCII string!
+        return [NSData data];
     }
-    // init result NSData
-    NSData *result = [NSData dataWithBytes:buffer length:length];
-    free(buffer);
-    source = nil;
+    char *bytes = malloc((([self length] + 3) / 4) * 3);
+    if (bytes == NULL) {
+        return [NSData data];
+    }
+    NSUInteger length = 0;
     
-    return  result;
+    NSUInteger i = 0;
+    while (YES) {
+        char buffer[4];
+        short bufferLength;
+        for (bufferLength = 0; bufferLength < 4; i++) {
+            if (characters[i] == '\0') {
+                break;
+            }
+            if (isspace(characters[i]) || characters[i] == '=') {
+                continue;
+            }
+            buffer[bufferLength] = decodingTable[(short)characters[i]];
+            if (buffer[bufferLength++] == CHAR_MAX) {    //  Illegal character!
+                free(bytes);
+                return [NSData data];
+            }
+        }
+        
+        if (bufferLength == 0) {
+            break;
+        }
+        if (bufferLength == 1) {     //  At least two characters are needed to produce one byte!
+            free(bytes);
+            return [NSData data];
+        }
+        
+        //  Decode the characters in the buffer to bytes.
+        bytes[length++] = (buffer[0] << 2) | (buffer[1] >> 4);
+        if (bufferLength > 2) {
+            bytes[length++] = (buffer[1] << 4) | (buffer[2] >> 2);
+        }
+        if (bufferLength > 3) {
+            bytes[length++] = (buffer[2] << 6) | buffer[3];
+        }
+    }
+    
+    bytes = realloc(bytes, length);
+    return [NSData dataWithBytesNoCopy:bytes length:length];
+}
+
+
+
++ (NSString *)__private_base64EncodingWithData:(NSData *)data;
+{
+    if (data.length == 0)
+        return @"";
+    
+    char *characters = malloc(((data.length + 2) / 3) * 4);
+    if (characters == NULL) {
+        return @"";
+    }
+    NSUInteger length = 0;
+    
+    NSUInteger i = 0;
+    while (i < data.length) {
+        char buffer[3] = {0,0,0};
+        short bufferLength = 0;
+        while (bufferLength < 3 && i < data.length) {
+            buffer[bufferLength++] = ((char *)[data bytes])[i++];
+        }
+        //  Encode the bytes in the buffer to four characters, including padding "=" characters if necessary.
+        characters[length++] = encodingTable[(buffer[0] & 0xFC) >> 2];
+        characters[length++] = encodingTable[((buffer[0] & 0x03) << 4) | ((buffer[1] & 0xF0) >> 4)];
+        if (bufferLength > 1) {
+            characters[length++] = encodingTable[((buffer[1] & 0x0F) << 2) | ((buffer[2] & 0xC0) >> 6)];
+        } else {
+            characters[length++] = '=';
+        }
+        if (bufferLength > 2) {
+            characters[length++] = encodingTable[buffer[2] & 0x3F];
+        } else {
+            characters[length++] = '=';
+        }
+    }
+    
+    return [[[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES] init];
 }
 
 @end

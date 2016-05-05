@@ -28,6 +28,21 @@
     [self.view addSubview:view1];
     [self.view addSubview:view2];
     [self.view addSubview:view3];
+    
+    
+    
+    
+    NSString* message = @"test=yes";
+    NSString *key = @"yiyizuche2015";
+    NSString* str = [message rx_transform_AES128EncryptWithKey:key];
+    NSString* res = [str rx_transform_AES128DecryptWithKey:key];
+    if ([str isEqualToString:@"30WfPSljF8xIlv7HtCds4w=="]) {
+        NSLog(@"success");
+    } else {
+        NSLog(@"failed");
+    }
+    NSLog(@"%@",str);
+    NSLog(@"%@",res);
 }
 
 - (void)didReceiveMemoryWarning {
