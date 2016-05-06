@@ -1,6 +1,6 @@
 //
 //  NSFileManager+RXUtility.h
-//  RXCategoryExample
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 16/2/16.
 //  Copyright © 2016年 Rush.D.Xzj. All rights reserved.

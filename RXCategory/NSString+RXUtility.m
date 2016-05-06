@@ -1,6 +1,6 @@
 //
 //  NSString+RXUtility.m
-//  A2A
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15/4/17.
 //  Copyright (c) 2015年 Rush.D.Xzj. All rights reserved.

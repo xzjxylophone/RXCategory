@@ -1,6 +1,6 @@
 //
 //  NSObject+RXUtitlity.m
-//  RXCategoryExample
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15/12/7.
 //  Copyright © 2015年 Rush.D.Xzj. All rights reserved.

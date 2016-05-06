@@ -1,6 +1,6 @@
 //
 //  UIColor+RXUtility.h
-//  TestURL
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15-3-30.
 //  Copyright (c) 2015年 Rush.D.Xzj. All rights reserved.
@@ -13,6 +13,8 @@
 //以#开头的字符串（不区分大小写），如：#ffFFff，若需要alpha，则传#abcdef255，不传默认为1
 + (UIColor *)rx_colorWithString:(NSString *)name;
 + (UIColor *)rx_colorWithSameRGB:(CGFloat)rgb;
+// help you to divide 255.0f
++ (UIColor *)rx_colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 
 
 // UIColor 得到图片

@@ -1,6 +1,6 @@
 //
 //  UIImage+RXUtility.h
-//  TestURL
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15-3-30.
 //  Copyright (c) 2015年 Rush.D.Xzj. All rights reserved.
@@ -10,10 +10,16 @@
 
 @interface UIImage (RXUtility)
 - (UIImage *)rx_scaleToSize:(CGSize)newSize;
-//翻转UIImage
+
+
+// 有问题:!!!!!!!
+// 翻转UIImage
 - (UIImage *)rx_rotateWithImageOrientation:(UIImageOrientation)imageOrientation;
 
-- (UIImage*)rx_rotatedByDegrees:(CGFloat)degrees;
+- (UIImage *)rx_rotatedByDegrees:(CGFloat)degrees;
+
+- (UIImage *)rx_fixOrientationToUp;
+- (UIImage *)rx_cropWithRect:(CGRect)rect;
 
 
 @end

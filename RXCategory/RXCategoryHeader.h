@@ -1,6 +1,6 @@
 //
 //  RXCategoryHeader.h
-//  RXCategoryExample
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15/11/16.
 //  Copyright © 2015年 Rush.D.Xzj. All rights reserved.

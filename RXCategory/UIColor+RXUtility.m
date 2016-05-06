@@ -1,6 +1,6 @@
 //
 //  UIColor+RXUtility.m
-//  TestURL
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15-3-30.
 //  Copyright (c) 2015年 Rush.D.Xzj. All rights reserved.
@@ -45,6 +45,11 @@ int convertToInt(char c)
 + (UIColor *)rx_colorWithSameRGB:(CGFloat)rgb
 {
     return [UIColor colorWithRed:rgb/255.0f green:rgb/255.0f blue:rgb/255.0f alpha:1.0f];
+}
+
++ (UIColor *)rx_colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
+{
+    return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha];
 }
 
 - (UIImage *)rx_imageWithSize:(CGSize)size

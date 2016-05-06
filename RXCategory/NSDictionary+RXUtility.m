@@ -1,6 +1,6 @@
 //
 //  NSDictionary+RXUtility.m
-//  RXExample
+//  RXCategory
 //
 //  Created by Rush.D.Xzj on 15/10/9.
 //  Copyright © 2015年 Rush.D.Xzj. All rights reserved.
