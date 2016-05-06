@@ -26,6 +26,7 @@
 		58B167F71BF9D2530024EE61 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B167F51BF9D2530024EE61 /* MainViewController.m */; };
 		58B167F81BF9D2530024EE61 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B167F61BF9D2530024EE61 /* MainViewController.xib */; };
 		58FD6D791C152E9000CB800C /* NSObject+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FD6D781C152E9000CB800C /* NSObject+RXUtility.m */; };
+		C960ED7B1CDC471F005127A3 /* UIViewController+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		58B167F91BF9D2A60024EE61 /* RXCategoryHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RXCategoryHeader.h; sourceTree = "<group>"; };
 		58FD6D771C152E9000CB800C /* NSObject+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RXUtility.h"; sourceTree = "<group>"; };
 		58FD6D781C152E9000CB800C /* NSObject+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RXUtility.m"; sourceTree = "<group>"; };
+		C960ED791CDC471F005127A3 /* UIViewController+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RXUtility.h"; sourceTree = "<group>"; };
+		C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RXUtility.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 				581447041C72D14400D29075 /* NSFileManager+RXUtility.m */,
 				5810E8291C918328003EBFC7 /* UIApplication+RXUtility.h */,
 				5810E82A1C918328003EBFC7 /* UIApplication+RXUtility.m */,
+				C960ED791CDC471F005127A3 /* UIViewController+RXUtility.h */,
+				C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */,
 			);
 			name = RXCategory;
 			path = ../../RXCategory;
@@ -243,6 +248,7 @@
 				58B167F71BF9D2530024EE61 /* MainViewController.m in Sources */,
 				58B167EB1BF9D19B0024EE61 /* NSURL+RXUtility.m in Sources */,
 				58B167F31BF9D19B0024EE61 /* UIView+RXUtility.m in Sources */,
+				C960ED7B1CDC471F005127A3 /* UIViewController+RXUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

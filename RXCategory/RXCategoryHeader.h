@@ -23,4 +23,6 @@
 #import "UIView+RXUtility.h"
 #import "NSFileManager+RXUtility.h"
 #import "UIApplication+RXUtility.h"
+#import "UIViewController+RXUtility.h"
+
 #endif /* RXCategoryHeader_h */
