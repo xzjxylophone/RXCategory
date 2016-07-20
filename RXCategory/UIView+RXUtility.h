@@ -52,6 +52,31 @@
 - (void)rx_removeAppDidEnterBgNotification;
 
 
+
+#pragma mark - Constraint
+// 上下满的,左右满的
+- (void)rx_fillAllWithSubview:(UIView *)subview;
+// 上下居中,左右满的
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top;
+// 左右居中,上下慢的
+- (void)rx_fillWithSubview:(UIView *)subview left:(CGFloat)left;
+// 上下居中,左右居中
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left;
+// 任意位置
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right;
+
+
+
+- (void)rx_fillAllWithSuperview:(UIView *)superview;
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top;
+- (void)rx_fillWithSuperview:(UIView *)superview left:(CGFloat)left;
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top left:(CGFloat)left;
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right;
+
++ (void)rx_fillWithSuperview:(UIView *)superview subview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right;
+
+
+#pragma mark - Debug
 // 只有在 Debug 模式的情况下有效,方便调试用
 + (void)rx_setDefaultColorsInViews:(NSArray *)views;
 + (void)rx_setColors:(NSArray *)colors inViews:(NSArray *)views;

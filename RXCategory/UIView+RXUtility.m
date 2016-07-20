@@ -296,6 +296,70 @@
 
 
 
+#pragma mark - Constraint
+
+- (void)rx_fillAllWithSubview:(UIView *)subview
+{
+    [self rx_fillWithSubview:subview top:0 left:0 bottom:0 right:0];
+}
+
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top
+{
+    [self rx_fillWithSubview:subview top:top left:0 bottom:top right:0];
+}
+- (void)rx_fillWithSubview:(UIView *)subview left:(CGFloat)left
+{
+    [self rx_fillWithSubview:subview top:0 left:left bottom:0 right:left];
+}
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left
+{
+    [self rx_fillWithSubview:subview top:top left:left bottom:top right:left];
+}
+- (void)rx_fillWithSubview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right
+{
+    [UIView rx_fillWithSuperview:self subview:subview top:top left:left bottom:bottom right:right];
+}
+
+
+
+
+
+- (void)rx_fillAllWithSuperview:(UIView *)superview
+{
+    [self rx_fillWithSuperview:superview top:0 left:0 bottom:0 right:0];
+}
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top
+{
+    [self rx_fillWithSuperview:superview top:top left:0 bottom:top right:0];
+}
+- (void)rx_fillWithSuperview:(UIView *)superview left:(CGFloat)left
+{
+    [self rx_fillWithSuperview:superview top:0 left:left bottom:0 right:left];
+}
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top left:(CGFloat)left
+{
+    [self rx_fillWithSuperview:superview top:top left:left bottom:top right:left];
+}
+- (void)rx_fillWithSuperview:(UIView *)superview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right
+{
+    [UIView rx_fillWithSuperview:superview subview:self top:top left:left bottom:bottom right:right];
+}
+
+
+
++ (void)rx_fillWithSuperview:(UIView *)superview subview:(UIView *)subview top:(CGFloat)top left:(CGFloat)left bottom:(CGFloat)bottom right:(CGFloat)right
+{
+    [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *lc1 = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeLeading multiplier:1 constant:left];
+    NSLayoutConstraint *lc2 = [NSLayoutConstraint constraintWithItem:subview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1 constant:top];
+    NSLayoutConstraint *lc3 = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:subview attribute:NSLayoutAttributeTrailing multiplier:1 constant:right];
+    NSLayoutConstraint *lc4 = [NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:subview attribute:NSLayoutAttributeBottom multiplier:1 constant:bottom];
+    [superview addConstraints:@[lc1, lc2, lc3, lc4]];
+}
+
+
+#pragma mark - Debug
+
 + (void)rx_setDefaultColorsInViews:(NSArray *)views
 {
     [self setColors:@[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]] inViews:views];
@@ -328,11 +392,4 @@
 {
     return [self rx_setColors:colors inViews:views];
 }
-
-
-
-
-
-
-
 @end
