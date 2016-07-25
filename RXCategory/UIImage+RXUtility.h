@@ -22,4 +22,12 @@
 - (UIImage *)rx_cropWithRect:(CGRect)rect;
 
 
+
+
+// 需要加入很多的东西
+
+
+
+
+
 @end

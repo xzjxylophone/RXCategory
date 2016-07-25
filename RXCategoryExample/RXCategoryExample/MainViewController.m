@@ -21,9 +21,11 @@
 //    [self test1];
     
     
-    [self test2];
+//    [self test2];
     
 //    [self test3];
+    
+    [self test4];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,6 +108,48 @@
     [self.view addSubview:view1];
     
 }
+
+- (void)test4
+{
+    NSArray *fileNameArray = @[@"1", @"1.1", @"2", @"2.1", @"3", @"3.1", @"4"];
+    NSArray *fileExtArray = @[@"jpg", @"png", @"png", @"jpg", @"png", @"png", @"jpg"];
+    
+    
+    fileNameArray = @[@"1", @"2", @"3", @"4"];
+    fileExtArray = @[@"jpg", @"png", @"png", @"jpg"];
+    
+    NSMutableArray *imageArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < fileNameArray.count; i++) {
+        NSString *fileName = fileNameArray[i];
+        NSString *fileExt = fileExtArray[i];
+        UIImage *image = nil;
+        if ([fileExt isEqualToString:@"png"]) {
+            image = [UIImage imageNamed:fileName];
+        } else {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExt];
+            image = [UIImage imageWithContentsOfFile:filePath];
+        }
+        
+        if (image != nil) {
+            [imageArray addObject:image];
+            
+            
+            NSData *data = UIImagePNGRepresentation(image);
+            NSLog(@"fileName:%@, fileExt:%@, size:%@, length:%zd", fileName, fileExt, NSStringFromCGSize(image.size), data.length);
+        } else {
+            NSLog(@"fileName:%@, fileExt:%@ image is nil", fileName, fileExt);
+
+        }
+    }
+    
+    
+    for (UIImage *image in imageArray) {
+    }
+    
+    
+    
+}
+
 /*
 #pragma mark - Navigation
 
