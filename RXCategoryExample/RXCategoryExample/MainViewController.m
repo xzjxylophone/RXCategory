@@ -144,7 +144,22 @@
     
     
     for (UIImage *image in imageArray) {
+        NSData *data = UIImagePNGRepresentation(image);
+        NSLog(@"size:%@, length:%zd, imageOrientation:%zd", NSStringFromCGSize(image.size), data.length, image.imageOrientation);
+        if (image.imageOrientation != UIImageOrientationUp) {
+            UIImage *newImage = [image rx_rotateWithImageOrientation:UIImageOrientationUp];
+            NSData *newData = UIImagePNGRepresentation(newImage);
+            NSLog(@"newImage size:%@, length:%zd, imageOrientation:%zd", NSStringFromCGSize(newImage.size), newData.length, newImage.imageOrientation);
+        }
     }
+    NSLog(@"-----------------------");
+    
+    UIImage *image = imageArray[3];
+    
+    BOOL compressionOK = NO;
+    NSData *data = [image rx_compressionWithMaxLength:30 * 1024 compressionOK:&compressionOK];
+    
+    NSLog(@"data length:%zd, compressionOK:%zd", data.length, compressionOK);
     
     
     

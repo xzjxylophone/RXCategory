@@ -12,14 +12,19 @@
 - (UIImage *)rx_scaleToSize:(CGSize)newSize;
 
 
-// 有问题:!!!!!!!
-// 翻转UIImage
+
+// 翻转UIImage, Need to test
 - (UIImage *)rx_rotateWithImageOrientation:(UIImageOrientation)imageOrientation;
 
 - (UIImage *)rx_rotatedByDegrees:(CGFloat)degrees;
 
 - (UIImage *)rx_fixOrientationToUp;
+
+// It have change to orientationUp auto
 - (UIImage *)rx_cropWithRect:(CGRect)rect;
+
+
+- (NSData *)rx_compressionWithMaxLength:(NSInteger)length compressionOK:(BOOL *)compressionOK;
 
 
 
