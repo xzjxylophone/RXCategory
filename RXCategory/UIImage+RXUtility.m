@@ -206,7 +206,6 @@
     for (NSInteger i = 0; i < 10; i++) {
         CGFloat compressionQuality = 1 - i * 0.1;
         NSData *data = UIImageJPEGRepresentation(self, compressionQuality);
-        NSLog(@"compressionQuality:%.1f, data length:%zd", compressionQuality, data.length);
         if (data.length < length) {
             *compressionOK = YES;
             return data;
@@ -216,7 +215,6 @@
     for (NSInteger i = 1; i < 10; i++) {
         CGFloat compressionQuality = 0.1 - i * 0.01;
         NSData *data = UIImageJPEGRepresentation(self, compressionQuality);
-        NSLog(@"compressionQuality:%.2f, data length:%zd", compressionQuality, data.length);
         if (data.length < length) {
             *compressionOK = YES;
             return data;
