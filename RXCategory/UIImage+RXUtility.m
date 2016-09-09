@@ -229,7 +229,13 @@
 
 
 
-
+//UIImage图片转成Base64字符串：
+- (NSString *)rx_transform_base64String
+{
+    NSData *data = UIImageJPEGRepresentation(self, 1.0f);
+    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return encodedImageStr;
+}
 
 
 

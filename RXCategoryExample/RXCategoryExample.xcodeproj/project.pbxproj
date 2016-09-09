@@ -34,6 +34,7 @@
 		C985F5DD1D45A32D004D654D /* 1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = C985F5DA1D45A32D004D654D /* 1.1.png */; };
 		C985F5DE1D45A32D004D654D /* 2.1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C985F5DB1D45A32D004D654D /* 2.1.jpg */; };
 		C985F5DF1D45A32D004D654D /* 3.1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C985F5DC1D45A32D004D654D /* 3.1@2x.png */; };
+		C9DC3D101D543D210073C9B2 /* NSDate+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC3D0F1D543D210073C9B2 /* NSDate+RXUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,8 @@
 		C985F5DA1D45A32D004D654D /* 1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.1.png; sourceTree = "<group>"; };
 		C985F5DB1D45A32D004D654D /* 2.1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.1.jpg; sourceTree = "<group>"; };
 		C985F5DC1D45A32D004D654D /* 3.1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3.1@2x.png"; sourceTree = "<group>"; };
+		C9DC3D0E1D543D210073C9B2 /* NSDate+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RXUtility.h"; sourceTree = "<group>"; };
+		C9DC3D0F1D543D210073C9B2 /* NSDate+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RXUtility.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 				5810E82A1C918328003EBFC7 /* UIApplication+RXUtility.m */,
 				C960ED791CDC471F005127A3 /* UIViewController+RXUtility.h */,
 				C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */,
+				C9DC3D0E1D543D210073C9B2 /* NSDate+RXUtility.h */,
+				C9DC3D0F1D543D210073C9B2 /* NSDate+RXUtility.m */,
 			);
 			name = RXCategory;
 			path = ../../RXCategory;
@@ -275,6 +280,7 @@
 				58B167BD1BF9D18D0024EE61 /* main.m in Sources */,
 				58B167EC1BF9D19B0024EE61 /* UIColor+RXUtility.m in Sources */,
 				58B167F01BF9D19B0024EE61 /* UILabel+RXUtility.m in Sources */,
+				C9DC3D101D543D210073C9B2 /* NSDate+RXUtility.m in Sources */,
 				58B167EE1BF9D19B0024EE61 /* UIFont+RXUtility.m in Sources */,
 				58B167E91BF9D19B0024EE61 /* NSDictionary+RXUtility.m in Sources */,
 				581447051C72D14400D29075 /* NSFileManager+RXUtility.m in Sources */,

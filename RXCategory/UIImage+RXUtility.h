@@ -30,6 +30,8 @@
 
 
 // 需要加入很多的东西
+- (NSString *)rx_transform_base64String;
+
 
 
 

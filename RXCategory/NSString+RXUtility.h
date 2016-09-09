@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 @interface NSString (RXUtility)
 
@@ -48,6 +50,9 @@
 
 #pragma mark - MD5
 - (NSString *)rx_transform_MD5;
+
+//Base64字符串转UIImage图片：
+- (UIImage *)rx_transform_Base64Image;
 
 #pragma mark - AES Encrypt/Decrypt
 // http://www.cnblogs.com/xzjxylophone/p/5462673.html

@@ -165,6 +165,12 @@
     return [resultString lowercaseString];
 }
 
+- (UIImage *)rx_transform_Base64Image
+{
+    NSData *decodedImageData = [[NSData alloc] initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
+    return decodedImage;
+}
 
 
 
