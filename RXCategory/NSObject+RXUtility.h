@@ -11,4 +11,7 @@
 @interface NSObject (RXUtility)
 @property (nonatomic, retain) id rx_data;
 
+// NSDictionary
+- (NSString *)rx_jsonString;
+
 @end

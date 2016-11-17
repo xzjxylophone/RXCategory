@@ -25,7 +25,9 @@
     
 //    [self test3];
     
-    [self test4];
+//    [self test4];
+    
+    [self test5];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,6 +165,18 @@
     
     
     
+}
+
+- (void)test5
+{
+    NSDate *now = [NSDate new];
+    NSString *string = [now rx_dateStringWithFormatter:kE_RX_DateFormatterDate];
+    
+    NSDate *date = [NSDate rx_dateFromString:string formatter:kE_RX_DateFormatterDate];
+    
+    NSString *string2 = [date rx_dateStringWithFormatter:kE_RX_DateFormatterDate2];
+    
+    NSLog(@"string:%@, string2:%@", string, string2);
 }
 
 /*
