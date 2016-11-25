@@ -23,6 +23,10 @@
 - (BOOL)rx_isPureInt;
 // 大于零的整数
 - (BOOL)rx_isNoZeorIntValue;
+// 是否包含表情
+- (BOOL)rx_containEmoji;
+// 是否是中文
+- (BOOL)rx_isChinese;
 
 - (BOOL)rx_isTwoDoubleIntValueWithString:(NSString *)str;
 
