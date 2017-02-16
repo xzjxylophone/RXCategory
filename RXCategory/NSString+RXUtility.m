@@ -24,6 +24,9 @@
 }
 
 
+
+
+
 - (NSString *)rx_hiddenMobileFormatString
 {
     NSRange range;
@@ -33,9 +36,15 @@
 }
 - (BOOL)rx_isChinese
 {
-    NSString *match = @"(^[\u4e00-\u9fa5]+$)";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF matches %@", match];
-    return [predicate evaluateWithObject:self];
+    for (NSInteger i = 0; i < self.length; i++){
+        int a = [self characterAtIndex:i];
+        if(a > 0x4e00 && a < 0x9fff)
+        {
+            return YES;
+        }
+        
+    }
+    return NO;
 }
 
 - (BOOL)rx_containEmoji
@@ -151,6 +160,20 @@
 
 
 
+#pragma mark - Override NSString Method
+- (NSString *)rx_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement
+{
+    if (target.length == 0) {
+        return self;
+    }
+    
+    if ([self containsString:target]) {
+        return [self stringByReplacingOccurrencesOfString:target withString:replacement];
+    } else {
+        return self;
+    }
+    
+}
 
 #pragma mark - Phoneticize
 - (NSString *)rx_transform_Phoneticize

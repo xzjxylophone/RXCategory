@@ -23,7 +23,7 @@
     [comp setMinute:minute];
     [comp setSecond:second];
     
-    NSCalendar *myCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *myCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [myCal dateFromComponents:comp];
     return date;
 }

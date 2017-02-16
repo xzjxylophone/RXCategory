@@ -25,8 +25,9 @@
 - (BOOL)rx_isNoZeorIntValue;
 // 是否包含表情
 - (BOOL)rx_containEmoji;
-// 是否是中文
+// 是否是中文，只要包含中文就是中文
 - (BOOL)rx_isChinese;
+
 
 - (BOOL)rx_isTwoDoubleIntValueWithString:(NSString *)str;
 
@@ -38,6 +39,13 @@
 + (NSString *)rx_validStringWithObj:(id)obj;
 
 
+
+
+#pragma mark - Override NSString Method
+// __NSCFNString 如果不包含target有时会直接崩溃
+// http://blog.sina.com.cn/s/blog_8764c3140100wxc3.html
+// 没有发生替换的时候有可能出现问题
+- (NSString *)rx_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement;
 
 
 

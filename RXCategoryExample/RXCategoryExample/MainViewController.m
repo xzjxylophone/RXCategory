@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "RXCategoryHeader.h"
+#import <objc/runtime.h>
 @interface MainViewController ()
 
 @end
@@ -27,7 +28,9 @@
     
 //    [self test4];
     
-    [self test5];
+//    [self test5];
+    
+    [self test6];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +40,38 @@
 
 
 #pragma mark - Test
+
+- (void)test6
+{
+    
+    NSString *a = @"a";
+    NSString *b = [[a mutableCopy] copy];
+    NSLog(@"%p %p %@", a, b, object_getClass(b));
+    
+    
+//    
+//    
+//    NSDictionary *dic = @{@"data":@"abcdefghi"};
+//    
+//    
+//    
+//    
+//    
+////    NSString *jsonString = @"{\"data\"=abcdefghi}";
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+//    
+//    NSDictionary *dic2 = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    
+    
+    
+//    char *c = "abctest";
+    char *c = "123456abctest";
+    CFStringRef str = CFStringCreateWithCString(NULL, c, kCFStringEncodingASCII);
+    NSString *string = (__bridge NSString *)str;
+    NSString *str1 = [string stringByReplacingOccurrencesOfString:@"o" withString:@"123"];
+    NSLog(@"str1:%@", str1);
+}
+
 - (void)test1
 {
     UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
