@@ -12,7 +12,7 @@
 
 
 
-
+#pragma mark - old frame relate will deprecated
 @property (nonatomic, readwrite) CGFloat left;
 @property (nonatomic, readwrite) CGFloat top;
 @property (nonatomic, readwrite) CGFloat right;
@@ -25,16 +25,32 @@
 @property (nonatomic, readwrite) CGSize size;
 
 
+#pragma mark - frame relate
+@property (nonatomic) CGFloat rx_left;
+@property (nonatomic) CGFloat rx_top;
+@property (nonatomic) CGFloat rx_right;
+@property (nonatomic) CGFloat rx_bottom;
+@property (nonatomic) CGFloat rx_width;
+@property (nonatomic) CGFloat rx_height;
+@property (nonatomic) CGFloat rx_centerX;
+@property (nonatomic) CGFloat rx_centerY;
+@property (nonatomic) CGPoint rx_origin;
+@property (nonatomic) CGSize rx_size;
+
+
+#pragma mark - UITapGestrueRecognizer
 @property (nonatomic, strong) UITapGestureRecognizer *rx_tgr;
+// 会移除旧的手势
+- (void)rx_addGestureRecognizerWithTarget:(id)target action:(SEL)action;
+- (void)rx_removeGestureRecognizer;
 
-// 使整个UIView 变成圆形,  当且只有width = height 的时候才是圆形
+
+
+#pragma mark - round rect
 - (void)rx_makeRound;
-- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii bounds:(CGRect)bounds;
-
-- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii;
-
-// 是UIView 左右变成半圆形
 - (void)rx_makeLeftRightRound;
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii;
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii bounds:(CGRect)bounds;
 
 - (void)rx_removeAllSubviews;
 - (UIImage *)rx_imageFromView;
@@ -44,8 +60,6 @@
 
 - (UIViewController *)rx_viewController;
 
-- (void)rx_addGestureRecognizerWithTarget:(id)target action:(SEL)action;
-- (void)rx_removeGestureRecognizer;
 
 
 - (void)rx_addAppDidEnterBgNotification;

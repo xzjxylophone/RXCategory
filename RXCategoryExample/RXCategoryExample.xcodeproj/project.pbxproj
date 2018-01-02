@@ -105,7 +105,6 @@
 		58B167BA1BF9D18D0024EE61 /* RXCategoryExample */ = {
 			isa = PBXGroup;
 			children = (
-				C985F5CF1D459CF5004D654D /* res */,
 				58B167D21BF9D19B0024EE61 /* RXCategory */,
 				58B167BE1BF9D18D0024EE61 /* AppDelegate.h */,
 				58B167BF1BF9D18D0024EE61 /* AppDelegate.m */,
@@ -168,13 +167,6 @@
 			path = ../../RXCategory;
 			sourceTree = "<group>";
 		};
-		C985F5CF1D459CF5004D654D /* res */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = res;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,7 +198,7 @@
 				TargetAttributes = {
 					58B167B71BF9D18D0024EE61 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = FAHJ3Z55C4;
+						DevelopmentTeam = BMW986WME7;
 					};
 				};
 			};
@@ -359,7 +351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = FAHJ3Z55C4;
+				DEVELOPMENT_TEAM = BMW986WME7;
 				INFOPLIST_FILE = RXCategoryExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -373,7 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = FAHJ3Z55C4;
+				DEVELOPMENT_TEAM = BMW986WME7;
 				INFOPLIST_FILE = RXCategoryExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

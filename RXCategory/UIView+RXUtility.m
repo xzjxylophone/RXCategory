@@ -12,18 +12,8 @@
 
 @implementation UIView (RXUtility)
 
-#pragma mark - Property
-- (id)rx_tgr
-{
-    return objc_getAssociatedObject(self, @"rx_tgr");
-}
 
-- (void)setRx_tgr:(id)rx_tgr
-{
-    objc_setAssociatedObject(self, @"rx_tgr", rx_tgr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-
+#pragma mark - old frame relate will deprecated
 - (CGFloat)left
 {
     return self.frame.origin.x;
@@ -140,14 +130,129 @@
     self.frame = frame;
 }
 
+
+
+#pragma mark - frame relate
+- (CGFloat)rx_left {
+    return self.frame.origin.x;
+}
+- (void)setRx_left:(CGFloat)x {
+    CGRect frame = self.frame;
+    frame.origin.x = x;
+    self.frame = frame;
+}
+- (CGFloat)rx_top {
+    return self.frame.origin.y;
+}
+- (void)setRx_top:(CGFloat)y {
+    CGRect frame = self.frame;
+    frame.origin.y = y;
+    self.frame = frame;
+}
+- (CGFloat)rx_right {
+    return self.frame.origin.x + self.frame.size.width;
+}
+- (void)setRx_right:(CGFloat)right {
+    CGRect frame = self.frame;
+    frame.origin.x = right - frame.size.width;
+    self.frame = frame;
+}
+- (CGFloat)rx_bottom {
+    return self.frame.origin.y + self.frame.size.height;
+}
+- (void)setRx_bottom:(CGFloat)bottom {
+    CGRect frame = self.frame;
+    frame.origin.y = bottom - frame.size.height;
+    self.frame = frame;
+}
+- (CGFloat)rx_centerX {
+    return self.center.x;
+}
+- (void)setRx_centerX:(CGFloat)centerX {
+    self.center = CGPointMake(centerX, self.center.y);
+}
+- (CGFloat)rx_centerY {
+    return self.center.y;
+}
+- (void)setRx_centerY:(CGFloat)centerY {
+    self.center = CGPointMake(self.center.x, centerY);
+}
+- (CGFloat)rx_width {
+    return self.frame.size.width;
+}
+- (void)setRx_width:(CGFloat)width {
+    CGRect frame = self.frame;
+    frame.size.width = width;
+    self.frame = frame;
+}
+- (CGFloat)rx_height {
+    return self.frame.size.height;
+}
+- (void)setRx_height:(CGFloat)height {
+    CGRect frame = self.frame;
+    frame.size.height = height;
+    self.frame = frame;
+}
+- (CGPoint)rx_origin {
+    return self.frame.origin;
+}
+- (void)setRx_origin:(CGPoint)origin {
+    CGRect frame = self.frame;
+    frame.origin = origin;
+    self.frame = frame;
+}
+- (CGSize)rx_size {
+    return self.frame.size;
+}
+- (void)setRx_size:(CGSize)size {
+    CGRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
+}
+
+
+#pragma mark - UITapGestrueRecognizer
+- (id)rx_tgr
+{
+    return objc_getAssociatedObject(self, @"rx_tgr");
+}
+- (void)setRx_tgr:(id)rx_tgr
+{
+    objc_setAssociatedObject(self, @"rx_tgr", rx_tgr, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (void)rx_addGestureRecognizerWithTarget:(id)target action:(SEL)action
+{
+    if (self.rx_tgr != nil) {
+        [self removeGestureRecognizer:self.rx_tgr];
+    }
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+    tgr.numberOfTapsRequired = 1;
+    self.rx_tgr = tgr;
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:self.rx_tgr];
+}
+- (void)rx_removeGestureRecognizer
+{
+    if (self.rx_tgr != nil) {
+        [self removeGestureRecognizer:self.rx_tgr];
+    }
+}
+#pragma mark - round rect
 - (void)rx_makeRound
 {
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = self.width / 2.0f;
 }
+- (void)rx_makeLeftRightRound
+{
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = self.height / 2.0f;
+}
 
-
-
+- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii
+{
+    [self rx_makeRoundWithRectCorner:rectCorner cornerRadii:cornerRadii bounds:self.bounds];
+}
 - (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii bounds:(CGRect)bounds
 {
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:rectCorner cornerRadii:cornerRadii];
@@ -157,16 +262,6 @@
     self.layer.mask = maskLayer;
 }
 
-- (void)rx_makeRoundWithRectCorner:(UIRectCorner)rectCorner cornerRadii:(CGSize)cornerRadii
-{
-    [self rx_makeRoundWithRectCorner:rectCorner cornerRadii:cornerRadii bounds:self.bounds];
-}
-
-- (void)rx_makeLeftRightRound
-{
-    self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = self.height / 2.0f;
-}
 
 - (void)rx_removeAllSubviews
 {
@@ -235,25 +330,6 @@
 }
 
 
-
-- (void)rx_addGestureRecognizerWithTarget:(id)target action:(SEL)action
-{
-    if (self.rx_tgr != nil) {
-        [self removeGestureRecognizer:self.rx_tgr];
-    }
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
-    tgr.numberOfTapsRequired = 1;
-    self.rx_tgr = tgr;
-    self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:self.rx_tgr];
-}
-
-- (void)rx_removeGestureRecognizer
-{
-    if (self.rx_tgr != nil) {
-        [self removeGestureRecognizer:self.rx_tgr];
-    }
-}
 
 
 
