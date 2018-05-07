@@ -28,6 +28,32 @@
 //    
 //}
 
++ (NSString *)rx_identifier  {
+    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+}
+
++ (NSString *)rx_createUDID {
+    NSString *key = @"com.device_rxutility_uuid";
+    NSString *id = [[NSUserDefaults standardUserDefaults] objectForKey:key];    //获取标识为"UUID"的值
+    if(id == nil)  {
+        if([[[UIDevice currentDevice] systemVersion] floatValue] > 6.0) {
+            NSString *identifierNumber = [[NSUUID UUID] UUIDString];                //ios 6.0 之后可以使用的api
+            [[NSUserDefaults standardUserDefaults] setObject:identifierNumber forKey:key];  //保存为UUID
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else {
+            CFUUIDRef uuid = CFUUIDCreate(NULL);
+            CFStringRef uuidString = CFUUIDCreateString(NULL, uuid);                    //ios6.0之前使用的api
+            NSString *identifierNumber = [NSString stringWithFormat:@"%@", uuidString];
+            [[NSUserDefaults standardUserDefaults] setObject:identifierNumber forKey:key];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            CFRelease(uuidString);
+            CFRelease(uuid);
+        }
+        return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    }
+    return id;
+}
+
 
 + (NSString *)rx_currentPhoneNumber
 {
@@ -68,6 +94,8 @@
     if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6 (A1549/A1586)";
     if ([platform isEqualToString:@"iPhone8,1"]) return @"iPhone 6s";
     if ([platform isEqualToString:@"iPhone8,2"]) return @"iPhone 6s Plus";
+    if ([platform isEqualToString:@"iPhone9,1"]) return @"iPhone7";
+    if ([platform isEqualToString:@"iPhone9,2"]) return @"iPhone7Plus";
     
     if ([platform isEqualToString:@"iPod1,1"])   return @"iPod Touch 1G (A1213)";
     if ([platform isEqualToString:@"iPod2,1"])   return @"iPod Touch 2G (A1288)";

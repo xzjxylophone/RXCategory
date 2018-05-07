@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIDevice (RXUtility)
++ (NSString *)rx_identifier;
++ (NSString *)rx_createUDID;
 + (NSString *)rx_currentPhoneNumber;
 + (NSString *)rx_currentDeviceModel;
 

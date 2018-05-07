@@ -28,6 +28,7 @@
 		58FD6D791C152E9000CB800C /* NSObject+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FD6D781C152E9000CB800C /* NSObject+RXUtility.m */; };
 		C960ED7B1CDC471F005127A3 /* UIViewController+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */; };
 		C9DC3D101D543D210073C9B2 /* NSDate+RXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DC3D0F1D543D210073C9B2 /* NSDate+RXUtility.m */; };
+		E84B466A1FFB853E009C69E1 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E84B46691FFB853E009C69E1 /* TestView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		C960ED7A1CDC471F005127A3 /* UIViewController+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RXUtility.m"; sourceTree = "<group>"; };
 		C9DC3D0E1D543D210073C9B2 /* NSDate+RXUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RXUtility.h"; sourceTree = "<group>"; };
 		C9DC3D0F1D543D210073C9B2 /* NSDate+RXUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RXUtility.m"; sourceTree = "<group>"; };
+		E84B46681FFB853E009C69E1 /* TestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
+		E84B46691FFB853E009C69E1 /* TestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				58B167F41BF9D2530024EE61 /* MainViewController.h */,
 				58B167F51BF9D2530024EE61 /* MainViewController.m */,
 				58B167F61BF9D2530024EE61 /* MainViewController.xib */,
+				E84B46681FFB853E009C69E1 /* TestView.h */,
+				E84B46691FFB853E009C69E1 /* TestView.m */,
 			);
 			path = RXCategoryExample;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				58B167EE1BF9D19B0024EE61 /* UIFont+RXUtility.m in Sources */,
 				58B167E91BF9D19B0024EE61 /* NSDictionary+RXUtility.m in Sources */,
 				581447051C72D14400D29075 /* NSFileManager+RXUtility.m in Sources */,
+				E84B466A1FFB853E009C69E1 /* TestView.m in Sources */,
 				58B167F21BF9D19B0024EE61 /* UIScrollView+RXUtility.m in Sources */,
 				58B167ED1BF9D19B0024EE61 /* UIDevice+RXUtility.m in Sources */,
 				58FD6D791C152E9000CB800C /* NSObject+RXUtility.m in Sources */,

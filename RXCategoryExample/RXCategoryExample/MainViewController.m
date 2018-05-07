@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "RXCategoryHeader.h"
 #import <objc/runtime.h>
+#import "TestView.h"
 @interface MainViewController ()
 
 @end
@@ -31,6 +32,10 @@
 //    [self test5];
     
     [self test6];
+    
+    TestView *tv = [[TestView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    tv.backgroundColor = [UIColor redColor];
+    [self.view addSubview:tv];
 }
 
 - (void)didReceiveMemoryWarning {
